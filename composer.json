@@ -6,8 +6,11 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "guzzlehttp/guzzle": "^6.2",
         "laravel/framework": "5.4.*",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "lstrojny/fxmlrpc": "0.9.3",
+        "supervisorphp/supervisor": "^3.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.3",
