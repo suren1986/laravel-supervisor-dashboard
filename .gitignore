@@ -10,3 +10,4 @@ Homestead.yaml
 npm-debug.log
 .env
 /config/supervisor.php
+_ide_helper.php
