@@ -53,14 +53,6 @@ $stateMapping = [
                     ?>
                     <div class="panel-heading">
                         <strong>{{ $groupName }}</strong> | {{ count($processes) }} process
-                        <div class="pull-right">
-                            <a href="start/default" title="Start all" data-toggle="tooltip"><span
-                                        class="glyphicon glyphicon-play text-success"></span></a>
-                            <a href="restart/default" title="Restart all" data-toggle="tooltip"><span
-                                        class="glyphicon glyphicon-refresh"></span></a>
-                            <a href="stop/default" title="Stop all" data-toggle="tooltip"><span
-                                        class="glyphicon glyphicon-stop text-danger"></span></a>
-                        </div>
                     </div>
                     <table class="table table-striped table-bordered">
                         @foreach ($processes as $process)
@@ -68,14 +60,6 @@ $stateMapping = [
                                 <td>{{ $process['name'] }}</td>
                                 <td>
                                     <span class="label label-{{ $stateMapping[$process['statename']] }}">{{ $process['statename'] }}</span>
-                                </td>
-                                <td>
-                                    <a href="start/default/foo:foo" title="Start" data-toggle="tooltip"><span
-                                                class="glyphicon glyphicon-play text-success"></span></a>
-                                    <a href="restart/default/foo:foo" title="Restart" data-toggle="tooltip"><span
-                                                class="glyphicon glyphicon-refresh"></span></a>
-                                    <a href="stop/default/foo:foo" title="Stop" data-toggle="tooltip"><span
-                                                class="glyphicon glyphicon-stop text-danger"></span></a>
                                 </td>
                             </tr>
                         @endforeach
