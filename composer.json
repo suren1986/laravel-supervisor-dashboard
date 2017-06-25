@@ -10,6 +10,7 @@
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "lstrojny/fxmlrpc": "0.9.3",
+        "predis/predis": "^1.1",
         "supervisorphp/supervisor": "^3.0"
     },
     "require-dev": {
