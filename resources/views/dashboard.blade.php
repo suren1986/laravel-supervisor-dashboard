@@ -47,20 +47,23 @@ $stateMapping = [
     <div class="row">
         <div class="col-lg-4">
             <div class="panel panel-default">
-                @foreach ($groups as list($groupName, $supervisor))
-                    <?php
-                    $processes = $supervisor->getAllProcessInfo();
-                    ?>
+                @foreach ($nodes as list($node, $groups))
                     <div class="panel-heading">
-                        <strong>{{ $groupName }}</strong> | {{ count($processes) }} process
+                        <strong>{{ $node }}</strong> | {{ count($groups) }} groups
                     </div>
                     <table class="table table-striped table-bordered">
-                        @foreach ($processes as $process)
+                        @foreach ($groups as $group => $detail)
+                            <?php
+                            extract($detail);
+                            ?>
                             <tr>
-                                <td>{{ $process['name'] }}</td>
+                                <td>{{ $group }}</td>
                                 <td>
-                                    <span class="label label-{{ $stateMapping[$process['statename']] }}">{{ $process['statename'] }}</span>
+                                    @foreach ($statCount as $stat => $c)
+                                    <span class="label label-{{ $stateMapping[$stat] ?? 'info' }}">{{ $c }} {{ $stat }}</span>
+                                    @endforeach
                                 </td>
+                                <td>{{ $queueSize }}</td>
                             </tr>
                         @endforeach
                     </table>

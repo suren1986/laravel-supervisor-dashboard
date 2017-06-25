@@ -11,8 +11,11 @@ class SupervisorController extends Controller
 {
     public function dashboard()
     {
-        $groups = [];
-        foreach (config('supervisor') as list($groupName, $url, $username, $password)) {
+
+        $queueManager = app('queue');
+
+        $nodes = [];
+        foreach (config('supervisor') as list($node, $url, $username, $password)) {
             $transport = new StreamSocketTransport();
             $transport->setHeader(
                 'Authorization',
@@ -22,14 +25,33 @@ class SupervisorController extends Controller
             $client = new Client($url, $transport);
             $connector = new XmlRpc($client);
             $supervisor = new Supervisor($connector);
-            $groups[] = [
-                $groupName,
-                $supervisor,
+            $processes = $supervisor->getAllProcessInfo();
+
+            $groups = [];
+            foreach ($processes as $process) {
+                $group = $process['group'];
+                $statename = $process['statename'];
+                $groups[$group]['count'] = ($groups[$group]['count'] ?? 0) + 1;
+                $groups[$group]['statCount'][$statename] = ($groups[$group]['stat'][$statename] ?? 0) + 1;
+            }
+
+            foreach (array_keys($groups) as $group) {
+                $queueSize = 0;
+                if (preg_match('/^laravel-queue-(.+)$/', $group, $match)) {
+                    $queueSize = $queueManager->size($match[1]);
+                }
+
+                $groups[$group]['queueSize'] = $queueSize;
+            }
+
+            $nodes[] = [
+                $node,
+                $groups,
             ];
         }
 
         return view('dashboard', [
-            'groups' => $groups,
+            'nodes' => $nodes,
         ]);
     }
 }
