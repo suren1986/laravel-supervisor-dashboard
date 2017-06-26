@@ -5,7 +5,7 @@ Inspired by [supervisorphp/monitor](https://github.com/supervisorphp/monitor)
 - Display status of subprocesses in [Supervisor](http://supervisord.org/).
 - Display queue length consumed by Supervisor subprocess.
 
-##Install
+## Install
 
 Via composer
 
@@ -13,7 +13,7 @@ Via composer
 $ composer create-project suren/laravel-supervisor-dashboard
 ```
 
-##Usage
+## Usage
 
 - Config your supervisor service. Add `[inet_http_server]` to supervisor config file, like  
 ```
