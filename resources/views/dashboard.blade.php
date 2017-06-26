@@ -32,6 +32,13 @@ $stateMapping = [
     <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <style>
+        td {
+            width: 33%;
+            word-break: break-all;
+        }
+    </style>
 </head>
 
 <body>
@@ -46,12 +53,18 @@ $stateMapping = [
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-4">
-            <div class="panel panel-default">
-                @foreach ($nodes as list($node, $groups))
+            @foreach ($nodes as list($node, $groups))
+                <div class="panel panel-default">
                     <div class="panel-heading">
                         <strong>{{ $node }}</strong> | {{ count($groups) }} groups
                     </div>
                     <table class="table table-striped table-bordered">
+                        <thead>
+                            <th>Group</th>
+                            <th>Status</th>
+                            <th>Queue size</th>
+                        </thead>
+                        <tbody>
                         @foreach ($groups as $group => $detail)
                             <?php
                             extract($detail);
@@ -60,15 +73,16 @@ $stateMapping = [
                                 <td>{{ $group }}</td>
                                 <td>
                                     @foreach ($statCount as $stat => $c)
-                                    <span class="label label-{{ $stateMapping[$stat] ?? 'info' }}">{{ $c }} {{ $stat }}</span>
+                                        <span class="label label-{{ $stateMapping[$stat] ?? 'info' }}">{{ $c }} {{ $stat }}</span>
                                     @endforeach
                                 </td>
                                 <td>{{ $queueSize }}</td>
                             </tr>
                         @endforeach
+                        </tbody>
                     </table>
-                @endforeach
-            </div>
+                </div>
+            @endforeach
         </div>
     </div>
 </div>
