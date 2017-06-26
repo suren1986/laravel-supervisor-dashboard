@@ -13,7 +13,7 @@ Via composer
 $ composer create-project suren/laravel-supervisor-dashboard
 ```
 
-#Usage
+##Usage
 
 - Config your supervisor service. Add `[inet_http_server]` to supervisor config file, like  
 ```
