@@ -52,7 +52,7 @@ $stateMapping = [
 </nav>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-4">
+        <div class="container">
             @foreach ($nodes as list($node, $groups))
                 <div class="panel panel-default">
                     <div class="panel-heading">
